@@ -1,0 +1,52 @@
+{
+    "contacts" : [
+        {
+            "name" : "Ashok Dey",
+            "mobile" : 8826624872,
+            "image" : "url here",
+            "address" : "Sector X, Noida"
+        },
+        {
+            "name" : "Jhon Doe",
+            "mobile" : 8943123454,
+            "image" : "url here",
+            "address" : "Sector X, NYC"
+        },
+        {
+            "name" : "Marry Jane",
+            "mobile" : 9045321234,
+            "image" : "url here",
+            "address" : "XYZ, XE, Washington DC"
+        },
+        {
+            "name" : "Ashley Doe",
+            "mobile" : 9845348907,
+            "image" : "url here",
+            "address" : "ABC Compound, Delhi"
+        },
+        {
+            "name" : "Sasha Jackie",
+            "mobile" : 9083456123,
+            "image" : "url here",
+            "address" : "23-CD, Ashrd Road, India"
+        },
+        {
+            "name" : "Vikash Vik",
+            "mobile" : 4534123452,
+            "image" : "url here",
+            "address" : "GIP, Car Shoppe, Noida"
+        },
+        {
+            "name" : "Bera Sic",
+            "mobile" : 4312432345,
+            "image" : "url here",
+            "address" : "Near U, A Road, Punjab"
+        },
+        {
+            "name" : "Mark Zukr",
+            "mobile" : 8432345123,
+            "image" : "url here",
+            "address" : "N-23, Sector AA, XYZ"
+        }
+    ]
+}

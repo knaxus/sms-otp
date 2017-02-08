@@ -1,0 +1,24 @@
+{
+  "name": "sms-otp-mean",
+  "version": "1.0.0",
+  "description": "a app to send otp sm to contacts",
+  "main": "app/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashokdey/sms-otp-mean.git"
+  },
+  "author": "Ashok Dey",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ashokdey/sms-otp-mean/issues"
+  },
+  "homepage": "https://github.com/ashokdey/sms-otp-mean#readme",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "express": "^4.14.1",
+    "mongoose": "^4.8.1"
+  }
+}

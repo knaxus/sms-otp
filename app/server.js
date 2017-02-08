@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const ejs = require('ejs');
 
-// create the app 
+// create the app
 const app = express();
 
 // custom modules 

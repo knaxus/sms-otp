@@ -10,14 +10,16 @@
                     <img src=<%= data.image %> alt="" class="img-circle" style="height:150px; width:150px;">
                     <hr>
                     <p>
-                        <b style="font-size:1.5em;"><%= data.firstName + ' ' + data.lastName %></b>
+                        <b style="font-size:1.8em;"><%= data.firstName + ' ' + data.lastName %></b>
                     </p>
-                    <p>
-                        <%= data.mobile %>
-                    </p>     
-                    <p>
-                        <%= data.address %>
-                    </p>     
+                    <div class="row" style="font-weight:bold;">
+                        <p class="glyphicon glyphicon-phone col-md-1 col-md-offset-3"></p>
+                        <p class="text-warning col-md-4"><%= data.mobile %></p>
+                    </div>
+                    <div class="row" style="font-weight:bold;">
+                        <p class="glyphicon glyphicon-map-marker col-md-1 col-md-offset-3"></p>
+                        <p class="text-success col-md-8 text-left"><%= data.address %></p>
+                    </div>           
                     <hr>
                     <a href=<%= '/compose/' + parseInt(data.mobile)%> class="btn btn-lg btn-primary">Send Message &nbsp; 
                     <span class="glyphicon glyphicon-edit"></span></a> 

@@ -4,11 +4,15 @@
   "description": "a app to send otp sm to contacts",
   "main": "app/server.js",
   "scripts": {
+    "start" : "app/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ashokdey/sms-otp-mean.git"
+  },
+  "engines": {
+    "node" : "7.3.0"
   },
   "author": "Ashok Dey",
   "license": "MIT",

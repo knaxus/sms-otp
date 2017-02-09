@@ -28,16 +28,16 @@
                         <td><%= '+' + sms.to %></td>
                         <td class="text-danger"><%= sms.otp %></td>
                         <% 
-                            let status = 'Pending';
+                            let status = 'text-danger glyphicon glyphicon-remove';
                             let style = 'alert alert-danger';
 
                             if (sms.status === 200) {
-                                status = 'Sent';
+                                status = 'text-success glyphicon glyphicon-ok';
                                 style = 'alert alert-success';
                             }
                         %>
-                        <td class="<%= style %>"><%= status %></td>
-                        <td><%= new Date(sms._sentAt).toString() %></td>
+                        <td class="<%= style %>"><span class="<%= status %>"></span></td>
+                        <td><%= new Date(sms._sentAt).toString(); %></td>
                         <td><a href="/sent/details/<%=sms._id %>" class="btn btn-primary btn-sm">Details</a></td>
                     </tr> 
                     <% }); %>

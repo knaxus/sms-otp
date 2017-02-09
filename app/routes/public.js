@@ -131,7 +131,6 @@ module.exports = (app) => {
         // get the sent messages from DB inDESC order 
         
         SMS.find({}, null, { sort : { _sentAt : -1 }}).then((allSMS) => {
-            //console.log('****All SMSes***\n', allSMS);
             res.render('sentMessages', {data : allSMS});
         }, (err) => {
             console.log(err);

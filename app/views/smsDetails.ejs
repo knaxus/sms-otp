@@ -1,0 +1,38 @@
+<% include partials/header %>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <% if(locals.err) {%>
+                    <p class="alert alert-danger"><%= err %></p>
+                <% 
+                    } else { 
+                        let status = '';
+                        if(sms.status === 200) {
+                            status = 'Sent';
+                        } 
+                %>
+                    <h2 class="text-success">Message Details</h2>
+                    <hr>
+                    <div class="alert alert-success" style="color:black;font-size:1.2em">
+                        <p style="font-size:2em;display:inline-block" class="">
+                            <a href="/contacts/details/<%= sms.to%>" class="">
+                                <%= sms.recepientName %>
+                            </a>
+                        </p>
+                        <hr>
+                        <p><b>Mobile number :</b><%= '+' + sms.to %></p>
+                        <p><b>Message Body : </b> <%= sms.body %></p>
+                        <p><b>Sent On : </b> <%= new Date(sms._sentAt).toString() %></p>
+                        <p><b>Status : </b> <%= status%></p>
+                    </div>
+                    <hr>              
+                <% }%>
+                <a href="/sent" class="btn btn-primary btn-md">Back to Sent Messages</a>
+                &nbsp; &nbsp; &nbsp; &nbsp;
+                <a href="/" class="btn btn-danger btn-md">Home</a>      
+            </div>
+        </div>
+    </div>
+
+<% include partials/footer %>

@@ -5,6 +5,7 @@ const credentials = require('../configs/credentials.json');
 const fs = require('fs');
 const path = require('path');
 const _ = require('lodash');
+const {ObjectID}        = require('mongodb');
 const twilioClient = require('twilio')(credentials.sid, credentials.token);
 // the SMS model, using ES6 destructuring  
 const {SMS} = require('../models/sms');
@@ -39,15 +40,15 @@ module.exports = (app) => {
         //console.log(result);
 
         if(parseInt(result.mobile) === parseInt(mob)) {
-            res.render('details', {data : result});
+            res.render('contactDetails', {data : result});
         }
         else if (result.code === '404p') {
-            res.render('details', {
+            res.render('contactDetails', {
                 err : `No person found with mobile number ${mob} !`
             });
         }
         else {
-            res.render('details', {
+            res.render('contactDetails', {
                 err : 'Failed to load data or invalid mobile number provided !'
             });
         }
@@ -131,12 +132,14 @@ module.exports = (app) => {
     app.get('/sent/details/:id', (req, res) => {
         let id = req.params.id;
         //fetch the sms using the id 
-        SMS.findById(id).then((sms) => {
-            res.send({sms});
-        }, (err) => {
-            console.log(err);
-        });
-        res.send('sent details  of message id : ' + id);
+        if(!ObjectID.isValid(id)) {
+            return res.status(400).render('smsDetails', {err : 'Invalid ID'});
+        }
+        else {
+            SMS.findById(id).then((sms) => {
+                res.status(200).render('smsDetails', {sms});
+            }, (err) => console.log(err));
+        }
     });
 
     // display the 404 page

@@ -38,7 +38,7 @@
                         %>
                         <td class="<%= style %>"><%= status %></td>
                         <td><%= new Date(sms._sentAt).toString() %></td>
-                        <td><a href="href="/sent/details/<%= sms._id %>"" class="btn btn-primary btn-sm">Details</a></td>
+                        <td><a href="/sent/details/<%=sms._id %>" class="btn btn-primary btn-sm">Details</a></td>
                     </tr> 
                     <% }); %>
                 <% }%>

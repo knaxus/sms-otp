@@ -27,3 +27,6 @@ const publicRoutes = require('./routes/public')(app);
 app.listen(port, () => {
     console.log('app started and listening to port ', port);
 })
+
+// we need to export the 'app' for testing purpose
+module.exports = {app};

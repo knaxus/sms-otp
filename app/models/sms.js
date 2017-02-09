@@ -13,8 +13,8 @@ let SMSSchema = new mongoose.Schema({
     },
     to : {
         // type : String,
-        // maxlength : 10,
-        // minlength : 10,
+        // maxlength : 11,
+        // minlength : 11,
         // trim : true,
         // validate : {
         //     validator : validator.isNumeric,

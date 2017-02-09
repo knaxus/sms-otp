@@ -26,7 +26,7 @@ module.exports = (app) => {
             res.status(200).render('contacts', {data});
         }
         else {
-            // respond with a error and 500 status code if contact.json fails to load
+            // respond with a error and 503 status code if contact.json fails to load
             res.status(503).render('home', {
                 err : 'No data found !'
             });
@@ -41,15 +41,15 @@ module.exports = (app) => {
         //console.log(result);
 
         if(parseInt(result.mobile) === parseInt(mob)) {
-            res.render('contactDetails', {data : result});
+            res.status(200).render('contactDetails', {data : result});
         }
         else if (result.code === '404p') {
-            res.render('contactDetails', {
+            res.status(404).render('contactDetails', {
                 err : `No person found with mobile number ${mob} !`
             });
         }
         else {
-            res.render('contactDetails', {
+            res.status(500).render('contactDetails', {
                 err : 'Failed to load data or invalid mobile number provided !'
             });
         }
@@ -60,14 +60,29 @@ module.exports = (app) => {
         
         let mobile = req.params.mob;
         let person = helpers.getPerson(mobile);
-        person.otp = helpers.getRandomInt();
-        res.render('compose', {data : person });
+        
+        // validate the mobile number 
+        if(parseInt(person.mobile) === parseInt(mobile)) {
+            person.otp = helpers.getRandomInt();
+            res.status(200).render('compose', {data : person });
+        }
+        else if (person.code === '404p') {
+            res.status(404).render('compose', {
+                err : `No person found with mobile number ${mobile} !`
+            });
+        }
+        else {
+            res.status(500).render('compose', {
+                err : 'Failed to load data or invalid mobile number provided !'
+            });
+        }
+        
     });
 
     // route to send and save the SMS 
     app.post('/compose', (req, res) => {
         
-        let data = _.pick(req.body, ['mobile', 'otp', 'message', 'time' ]);
+        let data = _.pick(req.body, ['mobile', 'otp', 'message' ]);
         
         // get the detail of the person and store the message in DB
         let person = helpers.getPerson(data.mobile); 
@@ -79,7 +94,7 @@ module.exports = (app) => {
                 mobile : person.mobile,
                 err : 'Message body is too less.'
             }
-            return res.render('sentResponse', {data : result });
+            return res.status(400).render('sentResponse', {data : result });
         }       
         // try to send the SMS
         twilioClient.sendMessage({
@@ -91,14 +106,16 @@ module.exports = (app) => {
                 console.log('Twilio Error => ', err);
                 let emsg = 'Unable to connect to Twilio API!';
                 if(err.code === 21608) {
-                    emsg = 'Twilio denied sending the message'
+                    emsg = 'Twilio denied sending the message, unverified mobile number' 
+                } else if (err.code === 21614) {
+                    emsg = 'Invalid mobile number !'
                 }
                 let result = {
                     name : person.firstName + ' ' + person.lastName,
                     mobile : person.mobile,
                     err : emsg
                 }
-                return res.render('sentResponse', {data : result });
+                return res.status(400).render('sentResponse', {data : result });
             }
 
             // create the sms data to store in DB
@@ -116,11 +133,11 @@ module.exports = (app) => {
             // save the data using a helper function 
             helpers.saveSMSInDB(sms, {name : person.firstName, mobile : person.mobile}, (result) => {
                 if(result.err) {
-                    res.render('sentResponse', {data : result});
+                    res.status(400).render('sentResponse', {data : result});
                 }
                 else {
                     result.success.msg = `Message sent to ${result.name} successfullly and saved to sent items`;
-                    res.render('sentResponse', {data : result});
+                    res.status(200).render('sentResponse', {data : result});
                 }
             });
             
@@ -129,8 +146,7 @@ module.exports = (app) => {
 
     // route to view all the sent messages
     app.get('/sent', (req, res) => {
-        // get the sent messages from DB inDESC order 
-        
+        // get the sent messages from DB in DESC order 
         SMS.find({}, null, { sort : { _sentAt : -1 }}).then((allSMS) => {
             res.render('sentMessages', {data : allSMS});
         }, (err) => {
@@ -155,7 +171,7 @@ module.exports = (app) => {
     });
 
     app.get('/404', (req, res) => {
-        res.status(400).render('404');
+        res.status(404).render('404');
     })
 
     // redirect to the 404 page

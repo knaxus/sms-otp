@@ -48,7 +48,7 @@ module.exports = (app) => {
         }
         else {
             res.render('details', {
-                err : 'Failed to load data!'
+                err : 'Failed to load data or invalid mobile number provided !'
             });
         }
     });
@@ -130,11 +130,17 @@ module.exports = (app) => {
     // route to check the details of sent messages 
     app.get('/sent/details/:id', (req, res) => {
         let id = req.params.id;
+        //fetch the sms using the id 
+        SMS.findById(id).then((sms) => {
+            res.send({sms});
+        }, (err) => {
+            console.log(err);
+        });
         res.send('sent details  of message id : ' + id);
     });
 
     // display the 404 page
-    // app.get('*', (req, res) => {
-    //     res.render('404');
-    // });
+    app.get('/*', (req, res) => {
+        res.render('404');
+    });
 };

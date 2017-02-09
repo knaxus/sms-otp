@@ -7,6 +7,12 @@
             "address" : "Sector X, Noida"
         },
         {
+            "name" : "The Boss",
+            "mobile" : "+913124531298",
+            "image" : "/icons/farmer.png",
+            "address" : "Gurgaon, Haryana"
+        },
+        {
             "name" : "Jhon Doe",
             "mobile" : "+918943123454",
             "image" : "/icons/b2.png",

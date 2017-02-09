@@ -3,7 +3,7 @@
 
 <div class="container text-center">
   <div class="row">
-    <div class="col-md-6 col-md-offset-2">
+    <div class="col-md-6 col-md-offset-3">
     <h2 class="text-primary">Available Contacts</h2>
     <hr>    
     <br>
@@ -18,9 +18,9 @@
             <tbody>
                 <% data.contacts.forEach((contact) => { %>
                     <tr>
-                        <td><%= contact.name %></td>
-                        <td><%= contact.address %></td>
-                        <td><%= contact.mobile %></td>
+                        <td style="text-align:left"><%= contact.name %></td>
+                        <td style="text-align:left"><%= contact.address %></td>
+                        <td style="text-align:left"><%= contact.mobile %></td>
                         <td> <a href=<%= '/contacts/details/' + parseInt(contact.mobile) %> class="btn btn-primary">View Details</a></td>
                     </tr>
                 <% }) %>

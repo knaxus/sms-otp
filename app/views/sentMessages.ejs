@@ -17,6 +17,7 @@
                             <th>OTP</th>
                             <th>Status</th>
                             <th style="text-align:center;">Time</th>
+                            <th>Actions</th>                            
                         </thead>
                     <tbody>
                     <% data.forEach((sms) => { %>
@@ -37,6 +38,7 @@
                         %>
                         <td class="<%= style %>"><%= status %></td>
                         <td><%= new Date(sms._sentAt).toString() %></td>
+                        <td><a href="href="/sent/details/<%= sms._id %>"" class="btn btn-primary btn-sm">Details</a></td>
                     </tr> 
                     <% }); %>
                 <% }%>

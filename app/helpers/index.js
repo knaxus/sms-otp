@@ -27,17 +27,19 @@ let getAllContacts = (fileName) => {
 let getPerson = (mobile) => {
     // fetch the data 
     let data = getAllContacts('contacts.json');
-    if(data.contacts) {
-        // if the file is found, filter out the details
-        let person = data.contacts.filter((el) => parseInt(el.mobile) === parseInt(mobile));
-        //console.log('person arr = ', person);
-        if(person.length === 1) {
-            return person[0];
-        }
-        else {              
-            return {
-                code : '404p' // person not found
-            };
+    if(data) {
+        if(data.contacts) {
+            // if the file is found, filter out the details
+            let person = data.contacts.filter((el) => parseInt(el.mobile) === parseInt(mobile));
+            //console.log('person arr = ', person);
+            if(person.length === 1) {
+                return person[0];
+            }
+            else {              
+                return {
+                    code : '404p' // person not found
+                };
+            }
         } 
     }
     else {

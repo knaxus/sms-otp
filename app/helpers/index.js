@@ -52,11 +52,11 @@ let getRandomInt = (min=100000, max=1000000) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-let saveSMSInDB = (sms, cb) => {
+let saveSMSInDB = (sms, details, cb) => {
 
     let message = {
-        name : sms.to,
-        mobile : sms.name,   
+        name : details.name,
+        mobile : details.mobile,   
         success : {
             msg : ''
         }, 
@@ -95,6 +95,11 @@ let saveSMSInDB = (sms, cb) => {
         }
         else if(err.errors._sentAt) {
             message.err = 'Please specify the time of sending message';            
+            console.log(message.err);
+            cb(message);                
+        }
+        else if(err.errors._sentAt) {
+            message.err = 'Please specify the message status code';            
             console.log(message.err);
             cb(message);                
         }

@@ -58,6 +58,16 @@ let SMSSchema = new mongoose.Schema({
     _sentAt : {
         type : Number,
         required : true
+    },
+    status : {
+        type : Number,
+        validate: {
+            validator: function(v) {
+                return /^\d{3}$/.test(v);
+            },
+            message: '{VALUE} is not a valid status code!'
+        },
+        required : true
     }
 });
 

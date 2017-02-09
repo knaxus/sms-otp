@@ -6,24 +6,40 @@
         <% if(data.err) { %>
 
            <% } else { %>
-            <table class="table">
-                <thead>
-                <th>Name</th>
-                <th>Mobile Number</th>
-                <th>OTP</th>
-                <th style="text-align:center;">Time</th>
-            </thead>
-            <tbody>
-                <% data.forEach((sms) => { %>
-                <tr>
-                    <td><a href="/contacts/details/<%= sms.to %>" class="">
-                        <%= sms.recepientName %>
-                    </a></td>
-                    <td><%= '+' + sms.to %></td>
-                    <td><%= sms.otp %></td>
-                    <td><%= new Date(sms._sentAt).toString() %></td>
-                </tr> 
-                <% }); %>
+            
+                <% if(data.length < 1)  {%>
+                    <p class="alert alert-danger"> No record found ! Why don't you send few messages?</p>
+                <% } else { %>
+                    <table class="table">
+                        <thead>
+                            <th>Name</th>
+                            <th>Mobile Number</th>
+                            <th>OTP</th>
+                            <th>Status</th>
+                            <th style="text-align:center;">Time</th>
+                        </thead>
+                    <tbody>
+                    <% data.forEach((sms) => { %>
+                    <tr>
+                        <td><a href="/contacts/details/<%= sms.to %>" class="">
+                            <%= sms.recepientName %>
+                        </a></td>
+                        <td><%= '+' + sms.to %></td>
+                        <td class="text-danger"><%= sms.otp %></td>
+                        <% 
+                            let status = 'Pending';
+                            let style = 'alert alert-danger';
+
+                            if (sms.status === 200) {
+                                status = 'Sent';
+                                style = 'alert alert-success';
+                            }
+                        %>
+                        <td class="<%= style %>"><%= status %></td>
+                        <td><%= new Date(sms._sentAt).toString() %></td>
+                    </tr> 
+                    <% }); %>
+                <% }%>
             </tbody>
             </table>    
             <br>

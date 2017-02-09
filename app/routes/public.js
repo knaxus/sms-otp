@@ -66,35 +66,41 @@ module.exports = (app) => {
     app.post('/compose', (req, res) => {
         let data = _.pick(req.body, ['mobile', 'otp', 'message', 'time' ]);
         // get the detail of the person and store the message in DB
-        let person = helpers.getPerson(data.mobile);
-        // create the sms data to store in DB
-        let sms = new SMS({
-            recepientName : person.name,
-            to : person.mobile,
-            from : parseInt('+14707983806'),
-            otp : data.otp,
-            body : data.message,
-            _sentAt : new Date().getTime()
-        });
-        
-        // send the SMS
+        let person = helpers.getPerson(data.mobile);        
+        // try to send the SMS
         twilioClient.sendMessage({
             to : data.mobile,
-            from : '+14707983806',
+            from : credentials.phone,
             body : data.message
         }, (err, message) => {
             if(err) {
                 console.log('Twilio Error => ', err);
+                let emsg = 'Unable to connect to Twilio API!';
+                if(err.code === 21608) {
+                    emsg = 'Twilio denied sending the message'
+                }
                 let result = {
                     name : person.name,
                     mobile : person.mobile,
-                    err : 'Unable to connect to Twilio API!'
+                    err : emsg
                 }
                 return res.render('sentResponse', {data : result });
             }
-            console.log('message sent from twilio');
+
+            // create the sms data to store in DB
+            let sms = new SMS({
+                recepientName : person.name,
+                to : person.mobile,
+                from : parseInt(credentials.phone),
+                otp : data.otp,
+                body : data.message,
+                _sentAt : new Date().getTime(),
+                status : 200 // can use message.status
+            });
+
+            console.log('message sent to Twilio API');
             // save the data using a helper function 
-            helpers.saveSMSInDB(sms, (result) => {
+            helpers.saveSMSInDB(sms, {name : person.name, mobile : person.mobile}, (result) => {
                 if(result.err) {
                     res.render('sentResponse', {data : result});
                 }

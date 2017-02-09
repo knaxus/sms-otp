@@ -1,0 +1,28 @@
+<% include partials/header %>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 text-center">
+                <% if(locals.err) { %>
+                    <p class="alert alert-danger"> <%= err %> </p>
+                <% } else { %>
+                    <img src=<%= data.image %> alt="" class="img-circle" style="height:150px; width:150px;">
+                    <hr>
+                    <p>
+                        <b style="font-size:1.5em;"><%= data.name %></b>
+                    </p>
+                    <p>
+                        <%= data.mobile %>
+                    </p>     
+                    <p>
+                        <%= data.address %>
+                    </p>     
+                    <hr>
+                    <a href=<%= '/compose/' + parseInt(data.mobile)%> class="btn btn-large btn-primary">Send Message &nbsp;&nbsp;&nbsp; 
+                    <span class="glyphicon glyphicon-edit"></span></a>     
+                <% }%>
+            </div>
+        </div>
+    </div>
+
+<% include partials/footer %>

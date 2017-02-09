@@ -1,0 +1,33 @@
+<% include partials/header %>
+    <!-- Page Content -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-2">
+    <% if(locals.data) { %>
+        <table class="table">
+            <thead>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Mobile</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                <% data.contacts.forEach((contact) => { %>
+                    <tr>
+                        <td><%= contact.name %></td>
+                        <td><%= contact.address %></td>
+                        <td><%= contact.mobile %></td>
+                        <td> <a href=<%= '/contacts/details/' + parseInt(contact.mobile) %> class="btn btn-primary">View Details</a></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p class="alert alert-danger"><%= err %></p>
+    <% }%>
+    </div>
+  </div>
+</div>
+    <!-- /.container -->
+<% include partials/footer %>

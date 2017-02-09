@@ -13,15 +13,17 @@ const ejs = require('ejs');
 const app = express();
 
 // custom modules 
-const publicRoutes = require('./routes/public')(app);
 const mongoose = require('./db');
 
 // middlewares here
+app.use(bodyParser.urlencoded( {extended : true}));
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname + '/_public')));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname + '/views'));
 
+const publicRoutes = require('./routes/public')(app);
 
 app.listen(port, () => {
-    console.log('app stated and listening to port ', port);
+    console.log('app started and listening to port ', port);
 })

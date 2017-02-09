@@ -1,0 +1,35 @@
+<% include partials/header %>
+
+    <div class="container">
+        <form class="form-horizontal col-md-6 col-md-offset-2" method="post" action="/compose">
+        <fieldset>
+
+        <!-- Form Name -->
+        <legend>Send SMS to : <%= data.name %></legend>
+
+        <!-- Text input-->
+        <div class="form-group">
+        <label class="col-md-4 control-label" for="message">Message</label>  
+        <div class="col-md-8">
+        <input id="message" name="message" type="text" placeholder="" class="form-control input-md" required="" value="<%='Hi. Your OTP is: ' + data.otp %>">
+        <span class="help-block">Refresh the page to generate new <b>OTP</b></span>
+        <input type="hidden" name="mobile" value="<%= data.mobile%>" >
+        <input type="hidden" name="otp" value="<%= data.otp %>" >
+        </div>
+        </div>
+
+        <!-- Button (Double) -->
+        <div class="form-group">
+        <label class="col-md-4 control-label" for="button1id"></label>
+        <div class="col-md-8">
+            <button id="button1id" name="button1id" class="btn btn-primary">Send</button>
+            <a id="/" name="" class="btn btn-danger">Back to Home</a>
+      </div>
+        </div>
+
+        </fieldset>
+        </form>
+
+    </div>
+
+<% include partials/footer %>

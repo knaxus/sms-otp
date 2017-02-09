@@ -23,9 +23,9 @@ let SMSSchema = new mongoose.Schema({
         type: Number,
         validate: {
             validator: function(v) {
-                return /^\d{10}$/.test(v);
+                return /^\d{12}$/.test(v);
             },
-            message: '{VALUE} is not a valid 10 digit number!'
+            message: '{VALUE} is not a valid mobile number!'
         },
         required : true
     },
@@ -33,9 +33,19 @@ let SMSSchema = new mongoose.Schema({
         type: Number,
         validate: {
             validator: function(v) {
-                return /^\d{10}$/.test(v);
+                return /^\d{11}$/.test(v);
             },
-            message: '{VALUE} is not a valid 10 digit number!'
+            message: '{VALUE} is not a valid mobile number!'
+        },
+        required : true
+    },
+    otp : {
+        type : Number,
+        validate: {
+            validator: function(v) {
+                return /^\d{6}$/.test(v);
+            },
+            message: '{VALUE} is not a valid 6 digit otp!'
         },
         required : true
     },

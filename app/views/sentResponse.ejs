@@ -1,0 +1,37 @@
+<% include partials/header %>
+
+    <div class="container text-center">
+        <%
+        let response = '';
+
+        if(data.err) {
+            response = data.err;
+        } else {
+            name = data.success.name;
+            mobile = data.success.mobile;
+            response = data.success.msg;
+        }
+        
+        %>
+        <br>
+        <div class="col-md-6 col-md-offset-3">
+            <p class="alert alert-success" style="font-size:2em;">
+                <b class="text-success"><%= response %></b>
+            </p>
+            <br><br>
+            <a href="/sent" class="btn btn-large btn-primary">Go to Sent Messages</a>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <a href="/contacts/details/<%= mobile %>" class="btn btn-large btn-success">View <%= name %></a>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <a href="/" class="btn btn-large btn-danger">Go to Home</a>
+        </div>
+        
+    </div>
+
+<% include partials/footer %>

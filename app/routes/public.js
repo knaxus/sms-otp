@@ -23,7 +23,7 @@ module.exports = (app) => {
         // load the contact.son file
         let data = helpers.getAllContacts('contacts.json');
         if(data) {
-            res.render('home', {data});
+            res.render('contacts', {data});
         }
         else {
             res.render('home', {

@@ -29,5 +29,11 @@
     "mongoose": "^4.8.1",
     "twilio": "^2.11.1",
     "validator": "^6.2.1"
+  },
+  "devDependencies": {
+    "expect": "^1.20.2",
+    "mocha": "^3.2.0",
+    "nodemon": "^1.11.0",
+    "supertest": "^3.0.0"
   }
 }

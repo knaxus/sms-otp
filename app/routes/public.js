@@ -1,21 +1,21 @@
 // this file contains the public routes
 'use strict';
 // require the fs module to load the contacts.json file
-const credentials = require('../configs/credentials.json');
-const fs = require('fs');
-const path = require('path');
-const _ = require('lodash');
+const credentials       = require('../configs/credentials.json');
+const fs                = require('fs');
+const path              = require('path');
+const _                 = require('lodash');
 const {ObjectID}        = require('mongodb');
-const twilioClient = require('twilio')(credentials.sid, credentials.token);
+const twilioClient      = require('twilio')(credentials.sid, credentials.token);
 // the SMS model, using ES6 destructuring  
-const {SMS} = require('../models/sms');
-const helpers = require('../helpers');
+const {SMS}             = require('../models/sms');
+const helpers           = require('../helpers');
 
 // require the filesystem module to load custom contacts.json file
 
 module.exports = (app) => {
     app.get('/', (req, res) => {
-        res.redirect('/contacts');
+        res.status(200).redirect('/contacts');
     });
 
     // all the contacts are displayed here 
@@ -23,10 +23,11 @@ module.exports = (app) => {
         // load the contact.son file
         let data = helpers.getAllContacts('contacts.json');
         if(data) {
-            res.render('contacts', {data});
+            res.status(200).render('contacts', {data});
         }
         else {
-            res.render('home', {
+            // respond with a error and 500 status code if contact.json fails to load
+            res.status(503).render('home', {
                 err : 'No data found !'
             });
         }

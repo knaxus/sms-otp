@@ -7,7 +7,7 @@ const fs = require('fs');
 const {SMS} = require('../models/sms');
 
 let sms = new SMS({
-    senderName : 'Ashok',
+    recepientName : 'Ashok',
     to : 9006781316,
     from : 8826624872,
     body : 'Hello this is a simple test to see the data saving',
@@ -15,7 +15,7 @@ let sms = new SMS({
 });
 
 let sms2 = new SMS({
-    senderName : 'Ashok Dey',
+    recepientName : 'Ashok Dey',
     to : parseInt('+918826624872'),
     from : parseInt('+14707983806'),
     otp : 123435,

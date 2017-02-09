@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 
 let SMSSchema = new mongoose.Schema({
-    senderName : {
+    recepientName : {
         type : String,
         minlength : 5,
         trim : true,
@@ -52,6 +52,7 @@ let SMSSchema = new mongoose.Schema({
     body : {
         type : String,
         minlength : 22,
+        maxlength : 100,
         required : true
     },
     _sentAt : {

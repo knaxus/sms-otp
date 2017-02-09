@@ -1,0 +1,35 @@
+<% include partials/header %>
+    <div class="container col-md-8 col-md-offset-2 text-center"> 
+    <h2 class="text-primary">All the Sent Messages</h2>
+    <hr>    
+    <br>
+        <% if(data.err) { %>
+
+           <% } else { %>
+            <table class="table">
+                <thead>
+                <th>Name</th>
+                <th>Mobile Number</th>
+                <th>OTP</th>
+                <th style="text-align:center;">Time</th>
+            </thead>
+            <tbody>
+                <% data.forEach((sms) => { %>
+                <tr>
+                    <td><a href="/contacts/details/<%= sms.to %>" class="">
+                        <%= sms.recepientName %>
+                    </a></td>
+                    <td><%= '+' + sms.to %></td>
+                    <td><%= sms.otp %></td>
+                    <td><%= new Date(sms._sentAt).toString() %></td>
+                </tr> 
+                <% }); %>
+            </tbody>
+            </table>    
+            <br>
+            <br>
+            <br>
+           <% } %>
+    </div>
+
+<% include partials/footer%>

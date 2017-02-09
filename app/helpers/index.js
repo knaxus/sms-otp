@@ -55,17 +55,15 @@ let getRandomInt = (min=100000, max=1000000) => {
 let saveSMSInDB = (sms, cb) => {
 
     let message = {
+        name : sms.to,
+        mobile : sms.name,   
         success : {
-            name : '',
-            mobile : '',
             msg : ''
-        }
+        }, 
     };
 
     sms.save().then((sms) => {
-        message.success.msg = 'sent message saved successfully';  
-        message.success.mobile = sms.to;
-        message.success.name = sms.name;      
+        message.success.msg = 'sent message saved successfully';        
         console.log(message.success.msg);
         cb(message);            
         

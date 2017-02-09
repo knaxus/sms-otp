@@ -69,7 +69,7 @@ module.exports = (app) => {
         let person = helpers.getPerson(data.mobile);
         // create the sms data to store in DB
         let sms = new SMS({
-            senderName : person.name,
+            recepientName : person.name,
             to : person.mobile,
             from : parseInt('+14707983806'),
             otp : data.otp,
@@ -84,18 +84,22 @@ module.exports = (app) => {
             body : data.message
         }, (err, message) => {
             if(err) {
-                return console.log('Twilio Error => ', err);
+                console.log('Twilio Error => ', err);
+                let result = {
+                    name : person.name,
+                    mobile : person.mobile,
+                    err : 'Unable to connect to Twilio API!'
+                }
+                return res.render('sentResponse', {data : result });
             }
             console.log('message sent from twilio');
             // save the data using a helper function 
             helpers.saveSMSInDB(sms, (result) => {
                 if(result.err) {
-                res.render('sentResponse', {data : result});
+                    res.render('sentResponse', {data : result});
                 }
                 else {
-                    result.success.name = person.name;
-                    result.success.mobile = person.mobile;
-                    result.success.msg = `Message sent to ${person.name} successfullly and saved to sent items`;
+                    result.success.msg = `Message sent to ${result.name} successfullly and saved to sent items`;
                     res.render('sentResponse', {data : result});
                 }
             });
@@ -105,7 +109,16 @@ module.exports = (app) => {
 
     // route to view all the sent messages
     app.get('/sent', (req, res) => {
-        res.send('all the sent messages here');
+        // get the sent messages from DB inDESC order 
+        
+        SMS.find({}, null, { sort : { _sentAt : -1 }}).then((allSMS) => {
+            //console.log('****All SMSes***\n', allSMS);
+            res.render('sentMessages', {data : allSMS});
+        }, (err) => {
+            console.log(err);
+            res.send('all the sent messages here');
+        });
+        
     })
 
     // route to check the details of sent messages 

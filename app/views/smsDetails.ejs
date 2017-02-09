@@ -17,14 +17,17 @@
                     <div class="alert alert-success" style="color:black;font-size:1.2em">
                         <p style="font-size:2em;display:inline-block" class="">
                             <a href="/contacts/details/<%= sms.to%>" class="">
-                                <%= sms.recepientName %>
-                            </a>
+                                <%= sms.recepientName %></a> &nbsp;&nbsp;<span class="helper" style="font-size:0.5em;">[click to view detaila]</span>
                         </p>
                         <hr>
-                        <p><b>Mobile number :</b><%= '+' + sms.to %></p>
-                        <p><b>Message Body : </b> <%= sms.body %></p>
-                        <p><b>Sent On : </b> <%= new Date(sms._sentAt).toString() %></p>
-                        <p><b>Status : </b> <%= status%></p>
+                        <p><b>Mobile number :</b>
+                            <span class="text-danger" style="font-size:1.5em; font-weight:bolder;"><%= '+' + sms.to %></span></p>
+                        <p><b>Message Body : </b> 
+                            <span class="text-danger" style="font-size:1.5em; font-weight:bolder;"><%= sms.body %></span>
+                        </p>
+                        <p><b>Sent On : </b> <b><%= new Date(sms._sentAt).toString() %></b></p>
+                        <p><b>Status : </b><span class="text-success glyphicon glyphicon-ok"></span>
+                        &nbsp;(<%= status%>) </p>
                     </div>
                     <hr>              
                 <% }%>

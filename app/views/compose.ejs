@@ -8,7 +8,11 @@
         <legend>Send OTP SMS</legend>
         <div class="col-md-3 text-center">
             <img class="img-circle" src="<%=data.image%>" style="height:50px; width:50px;"><br><br>
-            <span class="text-primary" style="font-size:1.5em;"><a href="/contacts/details/<%=data.mobile%>" class=""><%= data.name %></a></span><br><br>
+            <span class="text-primary" style="font-size:1.5em;">
+                <a href="/contacts/details/<%=data.mobile%>" class="">
+                    <%= data.firstName + ' ' + data.lastName %>
+                </a>
+            </span><br><br>
         
         </div>
         <!-- Text input-->
@@ -16,8 +20,9 @@
         <label class="col-md-2 control-label" for="message">Message : </label>  
         <div class="col-md-6">
         <input id="message" name="message" type="text" placeholder="" class="form-control input-md" required="" value="<%='Hi. Your OTP is: ' + data.otp %>">
-        <span class="help-block">Refresh the page to generate new <b>OTP.</b><br>Message limited to 100 characters only!</span>
-        <input type="hidden" name="mobile" value="<%= data.mobile%>" >
+        <span class="help-block">Refresh the page to generate new <b>OTP.</b>
+        <br>Message body range is limited from 22 to 100 characters only!</span>
+        <input type="hidden" name="mobile" value="<%= data.mobile %>" >
         <input type="hidden" name="otp" value="<%= data.otp %>" >
         </div>
         </div>

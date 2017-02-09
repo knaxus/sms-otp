@@ -70,7 +70,8 @@ let saveSMSInDB = (sms, details, cb) => {
         cb(message);            
         
     }, (err) => {
-        if(err.errors.senderName) {
+        console.log('***DB Insertion ERROR\n', err);
+        if(err.errors.recepientName) {
             message.err = 'Please check the contact name!';            
             console.log(message.err);
             cb(message);                
@@ -100,7 +101,7 @@ let saveSMSInDB = (sms, details, cb) => {
             console.log(message.err);
             cb(message);                
         }
-        else if(err.errors._sentAt) {
+        else if(err.errors.status) {
             message.err = 'Please specify the message status code';            
             console.log(message.err);
             cb(message);                

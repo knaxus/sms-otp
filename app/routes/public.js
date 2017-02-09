@@ -65,9 +65,21 @@ module.exports = (app) => {
 
     // route to send and save the SMS 
     app.post('/compose', (req, res) => {
+        
         let data = _.pick(req.body, ['mobile', 'otp', 'message', 'time' ]);
+        
         // get the detail of the person and store the message in DB
-        let person = helpers.getPerson(data.mobile);        
+        let person = helpers.getPerson(data.mobile); 
+        
+        // validate message body 
+        if (data.message.length < 22) {
+            let result = {
+                name : person.firstName + ' ' + person.lastName,
+                mobile : person.mobile,
+                err : 'Message body is too less.'
+            }
+            return res.render('sentResponse', {data : result });
+        }       
         // try to send the SMS
         twilioClient.sendMessage({
             to : data.mobile,
@@ -81,7 +93,7 @@ module.exports = (app) => {
                     emsg = 'Twilio denied sending the message'
                 }
                 let result = {
-                    name : person.name,
+                    name : person.firstName + ' ' + person.lastName,
                     mobile : person.mobile,
                     err : emsg
                 }
@@ -90,7 +102,7 @@ module.exports = (app) => {
 
             // create the sms data to store in DB
             let sms = new SMS({
-                recepientName : person.name,
+                recepientName : person.firstName + ' ' + person.lastName,
                 to : person.mobile,
                 from : parseInt(credentials.phone),
                 otp : data.otp,
@@ -101,7 +113,7 @@ module.exports = (app) => {
 
             console.log('message sent to Twilio API');
             // save the data using a helper function 
-            helpers.saveSMSInDB(sms, {name : person.name, mobile : person.mobile}, (result) => {
+            helpers.saveSMSInDB(sms, {name : person.firstName, mobile : person.mobile}, (result) => {
                 if(result.err) {
                     res.render('sentResponse', {data : result});
                 }

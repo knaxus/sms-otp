@@ -1,55 +1,64 @@
 {
     "contacts" : [
         {
-            "name" : "Ashok Dey",
+            "firstName" : "Ashok",
+            "lastName" : "Dey",
             "mobile" : "+918826624872",
             "image" : "/icons/b1.png",
             "address" : "Sector X, Noida"
         },
         {
-            "name" : "The Boss",
+            "firstName" : "K.N.",
+            "lastName" : "The Boss",
             "mobile" : "+913124531298",
             "image" : "/icons/farmer.png",
             "address" : "Gurgaon, Haryana"
         },
         {
-            "name" : "Jhon Doe",
+            "firstName" : "Jhon ",
+            "lastName" : "Doe",
             "mobile" : "+918943123454",
             "image" : "/icons/b2.png",
             "address" : "Sector X, NYC"
         },
         {
-            "name" : "Karol Jane",
+            "firstName" : "Karol ",
+            "lastName" : "Jane",
             "mobile" : "+919045321234",
             "image" : "/icons/b3.png",
             "address" : "XYZ, XE, Washington DC"
         },
         {
-            "name" : "Ashley Doe",
+            "firstName" : "Ashley ",
+            "lastName" : "Doe",
             "mobile" : "+919845348907",
             "image" : "/icons/g1.png",
             "address" : "ABC Compound, Delhi"
         },
         {
-            "name" : "Sasha Jackie",
+            "firstName" : "Sasha ",
+            "lastName" : "Chan",
             "mobile" : "+919083456123",
             "image" : "/icons/g2.png",
             "address" : "23-CD, Ashrd Road, India"
         },
         {
-            "name" : "Vikash Vik",
+            "firstName" : "Vikash ",
+            "lastName" : "Jack",
             "mobile" : "+918130140900",
             "image" : "/icons/b4.png",
             "address" : "GIP, Car Shoppe, Noida"
         },
         {
-            "name" : "Bera Sic",
+            "firstName" : "Bera ",
+            "lastName" : "Jackie",
             "mobile" : "+914312432345",
             "image" : "/icons/b5.png",
             "address" : "Near U, A Road, Punjab"
         },
         {
-            "name" : "Mark Zukr",
+            "firstName" : "Mark ",
+            "lastName" : "Zukr",
             "mobile" : "+918432345123",
             "image" : "/icons/m1.png",
             "address" : "N-23, Sector AA, XYZ"

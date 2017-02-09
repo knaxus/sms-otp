@@ -28,7 +28,7 @@
             &nbsp;
             &nbsp;
             <% if (data.err) { %>
-                <a href="/contacts/details/<%= mobile %>" class="btn btn-large btn-warning">Try Again? </a>
+                <a class="btn btn-large btn-warning" onclick="window.history.back()">Try Again? </a>
             <% } else { %>
                 <a href="/contacts/details/<%= mobile %>" class="btn btn-large btn-success">View <%= name %></a>
             <% } %>            

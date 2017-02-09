@@ -142,8 +142,12 @@ module.exports = (app) => {
         }
     });
 
-    // display the 404 page
+    app.get('/404', (req, res) => {
+        res.status(400).render('404');
+    })
+
+    // redirect to the 404 page
     app.get('/*', (req, res) => {
-        res.render('404');
+        res.redirect('/404');
     });
 };

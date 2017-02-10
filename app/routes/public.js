@@ -11,7 +11,6 @@ const twilioClient      = require('twilio')(credentials.sid, credentials.token);
 const {SMS}             = require('../models/sms');
 const helpers           = require('../helpers');
 
-// require the filesystem module to load custom contacts.json file
 
 module.exports = (app) => {
     app.get('/', (req, res) => {

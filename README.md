@@ -20,7 +20,6 @@ _Open terminal, type **npm run test-watch**, there are in total **13 test cases*
 * Librariies:
   * _**Express, body-parser, EJS, Ldash, Mongoose, Mongodb, Twilio, Validator**_
   * _**Mocha, Supertest and Expect**_ is used for testing.
-  * 
 
 ### Screenshot
 * _**Application UI**_

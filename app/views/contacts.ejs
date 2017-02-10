@@ -13,7 +13,6 @@
             <thead>
                 <th>First Name</th>
                 <th>Last Name</th>
-                <th>Address</th>
                 <th>Mobile</th>
                 <th>Action</th>
             </thead>
@@ -22,7 +21,6 @@
                     <tr>
                         <td style="text-align:left"><%= contact.firstName %></td>
                         <td style="text-align:left"><%= contact.lastName %></td>
-                        <td style="text-align:left"><%= contact.address %></td>
                         <td style="text-align:left"><%= contact.mobile %></td>
                         <td> <a href=<%= '/contacts/details/' + parseInt(contact.mobile) %> class="btn btn-primary">View Details</a></td>
                     </tr>

@@ -10,18 +10,7 @@ const {SMS}                     = require('../models/sms');
 const {dummySMS, populateSMS}   = require('./seed');
 
 // seed the db with data 
-
-//beforeEach(populateSMS);
-let msg = {
-    _id : new ObjectID(),
-    recepientName : 'Anup Singh',
-    to : 918234567272,
-    from : 21342342312,
-    otp : 123456,
-    body : 'Your otp is listed as 123456 in the DB',
-    _sentAt : new Date().getTime(),
-    status : 200 // can use message.status
-}
+beforeEach(populateSMS);
 
 // test for the GET / route
 describe('GET /', () => {
@@ -101,8 +90,18 @@ describe('GET /compose/:mobile', () => {
 describe('POST /compose', () => {
 
     it('should save a sms in th database', (done) => {
-
-        let sms = new SMS(msg); // custom msg object defined at globally
+        // creating a dummy msg to test saving in DB
+        let msg = {
+            _id : new ObjectID(),
+            recepientName : 'Anup Singh',
+            to : 918234567272,
+            from : 21342342312,
+            otp : 123456,
+            body : 'Your otp is listed as 123456 in the DB',
+            _sentAt : new Date().getTime(),
+            status : 200 // can use message.status
+        }
+        let sms = new SMS(msg);
 
         sms.save().then((smsDB) => {
             expect(smsDB.recepientName).toBe(msg.recepientName);
@@ -189,9 +188,9 @@ describe('POST /compose', () => {
 describe('GET /sent/details/:id', () => {
     let id = dummySMS[0]._id;
     
-    it('should give 200 for valid id', (done) => {
+    it('should give 200 for getting id', (done) => {
         request(app)
-            .get(`/sent/details/${msg._id}`)
+            .get(`/sent/details/${id}`)
             .expect(200)
             .end(done);
     });

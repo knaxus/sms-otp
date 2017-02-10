@@ -8,7 +8,7 @@
 * In the terminal, type _**npm install & npm start**_ to setup and run the application.
 
 ### How to Test?
-_Open terminal, type **npm run test-watch**, there are in total **13 test cases** which should pass._
+_Open terminal, type **npm run test-watch**, there are in total **14 test cases** which should pass._
 
 ### Libraries Usesd
 * I have used the **_Twilio API_** to send the OTP messages.

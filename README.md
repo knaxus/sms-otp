@@ -33,8 +33,7 @@ _Open terminal, type **npm run test-watch**, there are in total **14 test cases*
   * ![Screenshot](screenshots/ui7.JPG)
 
 * _**Test Cases**_
-  * ![Screenshot](screenshots/test1.JPG)
-  * ![Screenshot](screenshots/test2.JPG)
+  * ![Screenshot](screenshots/test.JPG)
  
 ### Credits 
 * _Icons are taken from : **Flaticon** and are Made by **Freepik**, Licensed under **CC 3.0**_

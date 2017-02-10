@@ -86,19 +86,51 @@ describe('GET /compose/:mobile', () => {
 
 
 describe('POST /compose', () => {
-    it('should give 200 for a valid sms', (done) => {
+
+    it('should give 200 for a verified mobile', function (done) {
+        // no arrow funtion because we need to use this inside the block
+        this.timeout(15000); // A very long environment setup.
+        setTimeout(done, 15000);
+
+        // the message data 
+        let sms = {
+            mobile : '+918826624872', // change this number to '+918826624872' to  pass this case
+            otp : dummySMS[0].otp,
+            message : dummySMS[0].body
+        }
+        
+        request(app)
+            .post('/compose')
+            .send(sms)
+            .expect(200)
+            .end((err, res) => {
+                if(err) {
+                    return done(err);
+                }
+                done();
+            });
+    });
+
+    it('should give 400 for a unverified mobile', function (done) {
+        // no arrow funtion because we need to use this inside the block
+        this.timeout(15000); // A very long environment setup.
+        setTimeout(done, 15000);
+
         // the message data 
         let sms = {
             mobile : '+9188266248721', // change this number to '+918826624872' to  pass this case
             otp : dummySMS[0].otp,
             message : dummySMS[0].body
         }
-
+        
         request(app)
             .post('/compose')
             .send(sms)
-            .expect(200)
-            .end(() => {
+            .expect(400)
+            .end((err, res) => {
+                if(err) {
+                    return done(err);
+                }
                 done();
             });
     });
@@ -119,3 +151,21 @@ describe('POST /compose', () => {
             });
     })
 });
+
+describe('GET /sent/details/:id', () => {
+    let id = dummySMS[0]._id;
+    
+    it('should give 200 for valid id', (done) => {
+        request(app)
+            .get(`/sent/details/${id}`)
+            .expect(200)
+            .end(done);
+    });
+
+    it('should give 404 for invalid id', (done) => {
+        request(app)
+            .get('/sent/details/' + id + 'asad')
+            .expect(400)
+            .end(done);
+    })
+})

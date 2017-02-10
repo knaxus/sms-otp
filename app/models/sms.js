@@ -1,7 +1,7 @@
 // the model to store the sent sms
 // require mongoose 
 
-const mongoose = require('mongoose');
+const mongoose  = require('mongoose');
 const validator = require('validator');
 
 let SMSSchema = new mongoose.Schema({

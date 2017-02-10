@@ -103,7 +103,7 @@ module.exports = (app) => {
             body : data.message
         }, (err, message) => {
             if(err) {
-                console.log('Twilio Error => ', err);
+                //console.log('Twilio Error => ', err);
                 let emsg = 'Unable to connect to Twilio API!';
                 if(err.code === 21608) {
                     emsg = 'Twilio denied sending the message, unverified mobile number' 
@@ -148,10 +148,12 @@ module.exports = (app) => {
     app.get('/sent', (req, res) => {
         // get the sent messages from DB in DESC order 
         SMS.find({}, null, { sort : { _sentAt : -1 }}).then((allSMS) => {
-            res.render('sentMessages', {data : allSMS});
+            res.status(200).render('sentMessages', {data : allSMS});
         }, (err) => {
             console.log(err);
-            res.send('all the sent messages here');
+            res.status(400).render('sentMessages', {
+                err : 'Something is broken, we\'ll fix it soon' 
+            });
         });
         
     })

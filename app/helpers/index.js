@@ -1,10 +1,10 @@
 'use strict';
-const path = require('path');
-const fs = require('fs');
-const configs = require('../configs');
-const mongoose = require('../db');
+const path      = require('path');
+const fs        = require('fs');
+const configs   = require('../configs');
+const mongoose  = require('../db');
 // the SMS model, using ES6 destructuring  
-const {SMS} = require('../models/sms');
+const {SMS}     = require('../models/sms');
 
 
 let getAllContacts = (fileName) => {

@@ -5,7 +5,7 @@
   "main": "app/server.js",
   "scripts": {
     "start": "node app/server.js",
-    "test": "export NODE_ENV=test || set \"NODE_ENV=test\" && mocha app/**/*test.js",
+    "test": "export NODE_ENV=test || set \"NODE_ENV=test\" && mocha --timeout 15000 app/**/*test.js",
     "test-watch": " nodemon --exec \"npm test\" "
   },
   "repository": {

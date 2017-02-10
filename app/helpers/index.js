@@ -66,7 +66,7 @@ let saveSMSInDB = (sms, details, cb) => {
 
     sms.save().then((sms) => {
         message.success.msg = 'sent message saved successfully';        
-        console.log(message.success.msg);
+        //console.log(message.success.msg);
         cb(message);            
         
     }, (err) => {

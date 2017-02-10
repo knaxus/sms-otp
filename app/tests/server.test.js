@@ -1,14 +1,27 @@
 // load in all the required modules 
-const expect        = require('expect');
-const request       = require('supertest');
-const {app}         = require('./../server');
-
+const expect                    = require('expect');
+const request                   = require('supertest');
+const {app}                     = require('./../server');
+// the objectID to create new id 
+const {ObjectID}                = require('mongodb');
+// the SMS model 
+const {SMS}                     = require('../models/sms');
 // require the dummy data 
 const {dummySMS, populateSMS}   = require('./seed');
 
 // seed the db with data 
 
-beforeEach(populateSMS);
+//beforeEach(populateSMS);
+let msg = {
+    _id : new ObjectID(),
+    recepientName : 'Anup Singh',
+    to : 918234567272,
+    from : 21342342312,
+    otp : 123456,
+    body : 'Your otp is listed as 123456 in the DB',
+    _sentAt : new Date().getTime(),
+    status : 200 // can use message.status
+}
 
 // test for the GET / route
 describe('GET /', () => {
@@ -87,6 +100,21 @@ describe('GET /compose/:mobile', () => {
 
 describe('POST /compose', () => {
 
+    it('should save a sms in th database', (done) => {
+
+        let sms = new SMS(msg); // custom msg object defined at globally
+
+        sms.save().then((smsDB) => {
+            expect(smsDB.recepientName).toBe(msg.recepientName);
+            expect(smsDB._id).toBe(msg._id);
+            expect(smsDB.to).toBe(msg.to);
+            expect(smsDB.otp).toBe(msg.otp);
+            expect(smsDB.status).toBe(msg.status);
+            done();
+        }).catch((err) => done(err));
+
+    });
+
     it('should give 200 for a verified mobile', function (done) {
         // no arrow funtion because we need to use this inside the block
         this.timeout(15000); // A very long environment setup.
@@ -107,7 +135,13 @@ describe('POST /compose', () => {
                 if(err) {
                     return done(err);
                 }
-                done();
+                // check if the data is saved in the DB 
+                SMS.findOne({'to' : sms.mobile}).then((smsDB) => {
+                    expect(smsDB.to).toBe(parseInt(sms.mobile));
+                    expect(smsDB.recepientName).toBe('Ashok Dey');
+                    expect(smsDB.status).toBe(200);
+                    done();
+                }).catch((err) => done(err));
             });
     });
 
@@ -157,7 +191,7 @@ describe('GET /sent/details/:id', () => {
     
     it('should give 200 for valid id', (done) => {
         request(app)
-            .get(`/sent/details/${id}`)
+            .get(`/sent/details/${msg._id}`)
             .expect(200)
             .end(done);
     });

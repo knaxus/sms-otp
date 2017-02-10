@@ -65,7 +65,7 @@ let SMSSchema = new mongoose.Schema({
             validator: function(v) {
                 return /^\d{3}$/.test(v);
             },
-            message: '{VALUE} is not a valid status code!'
+            message: '{VALUE} is not a valid 3 digit status code!'
         },
         required : true
     }

@@ -128,7 +128,7 @@ module.exports = (app) => {
                 status : 200 // can use message.status
             });
 
-            console.log('message sent to Twilio API');
+            //console.log('message sent to Twilio API');
             // save the data using a helper function 
             helpers.saveSMSInDB(sms, {name : person.firstName, mobile : person.mobile}, (result) => {
                 if(result.err) {
